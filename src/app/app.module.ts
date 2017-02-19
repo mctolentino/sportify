@@ -9,18 +9,29 @@ import {SearchComponent} from './search/search.component';
 import {SpotifyService} from "./services/spotify.service";
 import {Routes, RouterModule} from "@angular/router";
 import {TrackComponent} from './track/track.component';
+import {LoginComponent} from './login/login.component';
+import {ProtectedComponent} from './protected/protected.component';
+import {LoggedInGuard} from "./guards/loggedIn.guard";
+import {AUTH_PROVIDERS} from "./services/auth.service";
 
 const routes: Routes = [
   {path: '', redirectTo: 'search', pathMatch: 'full'},
   {path: 'search', component: SearchComponent},
-  {path: 'tracks/:id', component: TrackComponent}
+  {path: 'tracks/:id', component: TrackComponent, canActivate: [LoggedInGuard]},
+  {
+    path: 'protected', component: ProtectedComponent,
+    canActivate: [LoggedInGuard]
+  }
+
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    TrackComponent
+    TrackComponent,
+    LoginComponent,
+    ProtectedComponent
   ],
   imports: [
     BrowserModule,
@@ -29,9 +40,11 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     AlertModule.forRoot()
   ],
-  providers: [{
-    provide: SpotifyService, useClass: SpotifyService
-  }],
+  providers: [
+    AUTH_PROVIDERS,
+    LoggedInGuard,
+    {provide: SpotifyService, useClass: SpotifyService}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
