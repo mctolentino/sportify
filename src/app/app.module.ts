@@ -9,7 +9,10 @@ import {SearchComponent} from './search/search.component';
 import {SpotifyService} from "./services/spotify.service";
 import {Routes, RouterModule} from "@angular/router";
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path: '', redirectTo: 'search', pathMatch: 'full'},
+  {path: 'search', component: SearchComponent}
+];
 
 @NgModule({
   declarations: [
