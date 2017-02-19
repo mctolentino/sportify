@@ -7,7 +7,7 @@ export class SpotifyService {
   constructor(public http: Http) {
   }
 
-  searchByTrack(query: string) {
+  searchTrack(query: string) {
     let params: string = [
       `q=${query}`,
       `type=track`
