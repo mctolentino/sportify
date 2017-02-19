@@ -7,6 +7,9 @@ import {AlertModule} from 'ng2-bootstrap';
 import {AppComponent} from './app.component';
 import {SearchComponent} from './search/search.component';
 import {SpotifyService} from "./services/spotify.service";
+import {Routes, RouterModule} from "@angular/router";
+
+const routes: Routes = [];
 
 @NgModule({
   declarations: [
@@ -17,6 +20,7 @@ import {SpotifyService} from "./services/spotify.service";
     BrowserModule,
     FormsModule,
     HttpModule,
+    RouterModule.forRoot(routes),
     AlertModule.forRoot()
   ],
   providers: [{
